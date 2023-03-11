@@ -2,6 +2,11 @@
 This repository contains Federico Piacentini's challenge.
 
 
+## Assumptions
+
+- The service will not accept incoming negative numbers to add.
+- The percentage to be applied to the add calculation will be an integer between 0 and 100.
+
 ## Prerequisites
 - Java 17
 - Maven 3.8.4
