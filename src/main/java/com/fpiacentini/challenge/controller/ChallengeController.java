@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("challenge")
 public class ChallengeController {
 
-    @Autowired
     CalculationService calculationService;
 
     public ChallengeController(@Autowired CalculationService calculationService){
