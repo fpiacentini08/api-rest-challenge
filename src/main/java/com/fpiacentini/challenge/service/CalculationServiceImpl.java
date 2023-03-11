@@ -3,10 +3,14 @@ package com.fpiacentini.challenge.service;
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Service
+@RequestScope
 public class CalculationServiceImpl implements CalculationService{
 
     PercentageService percentageService;

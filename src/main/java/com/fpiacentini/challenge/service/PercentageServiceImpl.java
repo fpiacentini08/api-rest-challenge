@@ -1,15 +1,23 @@
 package com.fpiacentini.challenge.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
 import java.util.random.RandomGenerator;
 
+@Service
+@Scope("singleton")
 public class PercentageServiceImpl implements PercentageService{
 
-    private static final RandomGenerator randomGenerator = RandomGenerator.getDefault();
-    private static final int MIN_PERCENTAGE = 0;
-    private static final int MAX_PERCENTAGE = 100;
+    private ThirdPartyPercentageService thirdPartyPercentageService;
+
+    public PercentageServiceImpl(@Autowired ThirdPartyPercentageService thirdPartyPercentageService){
+        this.thirdPartyPercentageService = thirdPartyPercentageService;
+    }
 
     @Override
     public Integer getPercentage() {
-        return randomGenerator.nextInt(MIN_PERCENTAGE,MAX_PERCENTAGE+1);
+        return thirdPartyPercentageService.getPercentage();
     }
 }

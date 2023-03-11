@@ -19,6 +19,10 @@ public class ChallengeController {
     @Autowired
     CalculationService calculationService;
 
+    public ChallengeController(@Autowired CalculationService calculationService){
+        this.calculationService = calculationService;
+    }
+
     @PostMapping(path = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
