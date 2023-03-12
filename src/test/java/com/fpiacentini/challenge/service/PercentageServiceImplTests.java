@@ -10,11 +10,11 @@ import static org.mockito.Mockito.when;
 
 class PercentageServiceImplTests {
     private final ThirdPartyPercentageServiceMock thirdPartyPercentageServiceMock = mock(ThirdPartyPercentageServiceMock.class);
-    private final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache();
-    private final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
 
     @Test
     void givenThirdPartyServiceResponse_whenGetPercentage_shouldReturnTheSameNumber() {
+        final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(1800);
+        final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
         Integer percentage = percentageService.getPercentage();
         assertEquals(20, percentage);
@@ -22,9 +22,22 @@ class PercentageServiceImplTests {
 
     @Test
     void givenCachedValueNotExpired_whenGetPercentage_shouldReturnTheCachedNumber() {
+        final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(1800);
+        final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
         thirdPartyPercentageCacheMock.setPercentage(75);
         Integer percentage = percentageService.getPercentage();
         assertEquals(75, percentage);
     }
+
+    @Test
+    void givenCachedValueExpired_whenGetPercentage_shouldReturnTheNewSentNumber() {
+        final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(0);
+        final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
+        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
+        thirdPartyPercentageCacheMock.setPercentage(75);
+        Integer percentage = percentageService.getPercentage();
+        assertEquals(20, percentage);
+    }
+
 }

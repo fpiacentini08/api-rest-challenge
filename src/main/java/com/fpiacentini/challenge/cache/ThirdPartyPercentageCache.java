@@ -1,5 +1,6 @@
 package com.fpiacentini.challenge.cache;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +10,15 @@ import java.time.LocalDateTime;
 @Scope("singleton")
 public class ThirdPartyPercentageCache {
 
-    
-    private static final int SECONDS_TO_EXPIRE = 1800;
+
+    private int secondsToExpire;
 
     private Integer percentage;
     private LocalDateTime settingTime;
+
+    public ThirdPartyPercentageCache(@Value("${cache.expire.seconds:1800}") int secondsToExpire){
+        this.secondsToExpire = secondsToExpire;
+    }
 
     public Integer getPercentage() {
         return percentage;
@@ -29,7 +34,7 @@ public class ThirdPartyPercentageCache {
     }
 
     public boolean isExpired() {
-        return this.settingTime != null && LocalDateTime.now().isAfter(this.settingTime.plusSeconds(SECONDS_TO_EXPIRE));
+        return this.settingTime != null && LocalDateTime.now().isAfter(this.settingTime.plusSeconds(secondsToExpire));
     }
 
     public boolean hasBeenSet() {
