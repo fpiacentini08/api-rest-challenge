@@ -16,7 +16,7 @@ public class ThirdPartyPercentageCache {
     private Integer percentage;
     private LocalDateTime settingTime;
 
-    public ThirdPartyPercentageCache(@Value("${cache.expire.seconds:1800}") int secondsToExpire){
+    public ThirdPartyPercentageCache(@Value("${cache.expire.seconds:1800}") int secondsToExpire) {
         this.secondsToExpire = secondsToExpire;
     }
 
@@ -29,12 +29,12 @@ public class ThirdPartyPercentageCache {
         this.updateRetrievedAt();
     }
 
-    public void updateRetrievedAt() {
+    private void updateRetrievedAt() {
         this.settingTime = LocalDateTime.now();
     }
 
     public boolean isExpired() {
-        return this.settingTime != null && LocalDateTime.now().isAfter(this.settingTime.plusSeconds(secondsToExpire));
+        return this.settingTime == null || LocalDateTime.now().isAfter(this.settingTime.plusSeconds(secondsToExpire));
     }
 
     public boolean hasBeenSet() {

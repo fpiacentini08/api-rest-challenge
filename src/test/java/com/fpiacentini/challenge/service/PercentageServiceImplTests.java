@@ -31,7 +31,7 @@ class PercentageServiceImplTests {
     }
 
     @Test
-    void givenCachedValueExpired_whenGetPercentage_shouldReturnTheNewSentNumber() {
+    void givenCachedValueExpired_whenGetPercentage_shouldReturnTheThirdPartyServiceReturnedNumber() {
         final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(0);
         final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
