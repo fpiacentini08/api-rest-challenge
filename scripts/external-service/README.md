@@ -25,7 +25,7 @@ To stop the webserver, simply press CTRL + C.
 ```aidl
 
 $ python3 external-webserver.py
-Percentage Web server is running http://localhost:8081
+Percentage Web server is running on http://localhost:8081
 127.0.0.1 - - [12/Mar/2023 20:09:00] "GET / HTTP/1.1" 200 -
 127.0.0.1 - - [12/Mar/2023 20:09:00] Response: {"value": 2}
 127.0.0.1 - - [12/Mar/2023 20:11:28] "GET / HTTP/1.1" 200 -
