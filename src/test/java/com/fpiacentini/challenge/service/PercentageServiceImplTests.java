@@ -1,8 +1,6 @@
 package com.fpiacentini.challenge.service;
 
 import com.fpiacentini.challenge.mock.ThirdPartyPercentageServiceMock;
-import com.fpiacentini.challenge.model.NumbersToAdd;
-import com.fpiacentini.challenge.model.Result;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +12,7 @@ class PercentageServiceImplTests {
     private final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock);
 
     @Test
-    void givenThirdPartyServiceResponse_whenGetPercentage_shouldReturnTheSameNumber(){
+    void givenThirdPartyServiceResponse_whenGetPercentage_shouldReturnTheSameNumber() {
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
         Integer percentage = percentageService.getPercentage();
         assertEquals(20, percentage);
