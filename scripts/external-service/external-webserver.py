@@ -18,7 +18,7 @@ class PercentageServer (BaseHTTPRequestHandler):
         self.log_message(f"Response: {json_data}")
 if __name__ == "__main__":
     webServer = HTTPServer ((hName, Port), PercentageServer)
-    print("Percentage Web server is running http://%s:%s" % (hName, Port))
+    print("Percentage Web server is running on http://%s:%s" % (hName, Port))
 
     try:
         webServer.serve_forever()
