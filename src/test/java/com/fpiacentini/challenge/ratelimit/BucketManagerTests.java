@@ -8,8 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BucketManagerTests {
 
     @Test
-    void givenBucketWith10tokensAndRefillSeconds1_whenTryConsume_ShouldReturnTrue(){
-        BucketManager bucketManager = new BucketManager(10, 1);
+    void givenBucketWith3tokensAndRefillSeconds1_whenTryConsume3Times_ShouldReturnTrueAlways(){
+        BucketManager bucketManager = new BucketManager(3, 1);
+        assertTrue(bucketManager.tryConsume());
+        assertTrue(bucketManager.tryConsume());
         assertTrue(bucketManager.tryConsume());
     }
 
