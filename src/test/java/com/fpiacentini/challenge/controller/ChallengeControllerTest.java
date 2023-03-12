@@ -15,12 +15,12 @@ import static org.mockito.Mockito.when;
 
 public class ChallengeControllerTest {
 
-    private final CalculationServiceImpl calculationServiceMock = mock(CalculationServiceImpl.class);
     private static final NumbersToAdd numbersToAdd = new NumbersToAdd(2, 2);
     private static final Result result = new Result(15d);
+    private final CalculationServiceImpl calculationServiceMock = mock(CalculationServiceImpl.class);
 
     @Test
-    void givenNumbersToAdd_whenCalculateResult_shouldReturn200withResult(){
+    void givenNumbersToAdd_whenCalculateResult_shouldReturn200withResult() {
         ChallengeController challengeController = new ChallengeController(calculationServiceMock);
         when(calculationServiceMock.addNumbersAndApplyPercentage(numbersToAdd)).thenReturn(result);
 

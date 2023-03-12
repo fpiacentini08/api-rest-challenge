@@ -18,7 +18,7 @@ public class ChallengeController {
 
     CalculationService calculationService;
 
-    public ChallengeController(@Autowired CalculationService calculationService){
+    public ChallengeController(@Autowired CalculationService calculationService) {
         this.calculationService = calculationService;
     }
 
