@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 @Scope("singleton")
 public class ThirdPartyPercentageCache {
 
-    private static final int MINUTES_TO_EXPIRE = 30;
+    
+    private static final int SECONDS_TO_EXPIRE = 1800;
 
     private Integer percentage;
     private LocalDateTime settingTime;
@@ -20,6 +21,7 @@ public class ThirdPartyPercentageCache {
 
     public void setPercentage(Integer percentage) {
         this.percentage = percentage;
+        this.updateRetrievedAt();
     }
 
     public void updateRetrievedAt() {
@@ -27,7 +29,7 @@ public class ThirdPartyPercentageCache {
     }
 
     public boolean isExpired() {
-        return LocalDateTime.now().isAfter(this.settingTime.plusMinutes(MINUTES_TO_EXPIRE));
+        return this.settingTime != null && LocalDateTime.now().isAfter(this.settingTime.plusSeconds(SECONDS_TO_EXPIRE));
     }
 
     public boolean hasBeenSet() {

@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 public class PercentageServiceImpl implements PercentageService {
 
     private ThirdPartyPercentageService thirdPartyPercentageService;
-    private ThirdPartyPercentageCache thirdPartyPercentageCache = new ThirdPartyPercentageCache();
+    private ThirdPartyPercentageCache thirdPartyPercentageCache;
 
-    public PercentageServiceImpl(@Autowired ThirdPartyPercentageService thirdPartyPercentageService) {
+    public PercentageServiceImpl(@Autowired ThirdPartyPercentageService thirdPartyPercentageService, ThirdPartyPercentageCache thirdPartyPercentageCache) {
         this.thirdPartyPercentageService = thirdPartyPercentageService;
+        this.thirdPartyPercentageCache = thirdPartyPercentageCache;
     }
 
 
@@ -28,6 +29,5 @@ public class PercentageServiceImpl implements PercentageService {
     private void updateCachedPercentage() {
         Integer percentage = thirdPartyPercentageService.getPercentage();
         thirdPartyPercentageCache.setPercentage(percentage);
-        thirdPartyPercentageCache.updateRetrievedAt();
     }
 }
