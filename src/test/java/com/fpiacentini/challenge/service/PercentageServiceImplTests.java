@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 class PercentageServiceImplTests {
     private final ThirdPartyPercentageServiceMock thirdPartyPercentageServiceMock = mock(ThirdPartyPercentageServiceMock.class);
@@ -18,6 +20,7 @@ class PercentageServiceImplTests {
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
         Integer percentage = percentageService.getPercentage();
         assertEquals(20, percentage);
+        verify(thirdPartyPercentageServiceMock, times(1)).getPercentage();
     }
 
     @Test
@@ -28,6 +31,7 @@ class PercentageServiceImplTests {
         thirdPartyPercentageCacheMock.setPercentage(75);
         Integer percentage = percentageService.getPercentage();
         assertEquals(75, percentage);
+        verify(thirdPartyPercentageServiceMock, times(0)).getPercentage();
     }
 
     @Test
@@ -38,6 +42,7 @@ class PercentageServiceImplTests {
         thirdPartyPercentageCacheMock.setPercentage(75);
         Integer percentage = percentageService.getPercentage();
         assertEquals(20, percentage);
+        verify(thirdPartyPercentageServiceMock, times(1)).getPercentage();
     }
 
 }
