@@ -14,7 +14,7 @@ public class ThirdPartyPercentageServiceHttpClient extends BaseHttpClient {
                                                  @Value("${third.party.http.client.timeout.millis.read:2000}") Integer readTimeout,
                                                  @Value("${third.party.http.client.timeout.millis.write:2000}") Integer writeTimeout,
                                                  @Value("${third.party.http.client.timeout.millis.response:2000}") Integer responseTimeout,
-                                                 @Value("${third.party.http.client.url:http://localhost:8081}") String url) {
+                                                 @Value("${third.party.http.client.url}") String url) {
         super(connectionTimeout, readTimeout, writeTimeout, responseTimeout, url);
     }
 
