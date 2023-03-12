@@ -15,8 +15,11 @@ import java.io.IOException;
 @Component
 public class RateLimitFilter extends OncePerRequestFilter {
 
-    @Autowired
-    BucketManager bucketManager;
+    private BucketManager bucketManager;
+
+    public RateLimitFilter(@Autowired BucketManager bucketManager){
+        this.bucketManager = bucketManager;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

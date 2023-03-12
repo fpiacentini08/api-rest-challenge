@@ -18,14 +18,14 @@ public class ChallengeController {
 
     CalculationService calculationService;
 
-    public ChallengeController(@Autowired CalculationService calculationService){
+    public ChallengeController(@Autowired CalculationService calculationService) {
         this.calculationService = calculationService;
     }
 
     @PostMapping(path = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Result> create(@RequestBody NumbersToAdd numbersToAdd) {
+    public ResponseEntity<Result> calculateResult(@RequestBody NumbersToAdd numbersToAdd) {
         Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
