@@ -1,11 +1,7 @@
 # api-rest-challenge
 This repository contains Federico Piacentini's challenge.
 
-
-## Assumptions
-
-- The service will not accept incoming negative numbers to add.
-- The percentage to be applied to the add calculation will be an integer between 0 and 100.
+For extra information on the implementation details, you can check the [Wiki](https://github.com/fpiacentini08/api-rest-challenge/wiki).
 
 ## Prerequisites
 - Java 17
