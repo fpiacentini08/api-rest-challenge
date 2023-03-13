@@ -5,5 +5,5 @@ import com.fpiacentini.challenge.model.Result;
 
 public interface CalculationService {
 
-    public Result addNumbersAndApplyPercentage(NumbersToAdd numbersToAdd);
+    Result addNumbersAndApplyPercentage(NumbersToAdd numbersToAdd) throws Throwable;
 }

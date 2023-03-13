@@ -20,7 +20,7 @@ public class CalculationServiceImpl implements CalculationService{
     }
 
     @Override
-    public Result addNumbersAndApplyPercentage(NumbersToAdd numbersToAdd) {
+    public Result addNumbersAndApplyPercentage(NumbersToAdd numbersToAdd) throws Throwable {
         BigDecimal percentageToApply = new BigDecimal(percentageService.getPercentage() + 100);
         BigDecimal firstNumber = new BigDecimal(numbersToAdd.firstNumber().doubleValue());
         BigDecimal secondNumber = new BigDecimal(numbersToAdd.secondNumber().doubleValue());

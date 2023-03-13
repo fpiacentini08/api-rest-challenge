@@ -20,7 +20,7 @@ public class ChallengeControllerTest {
     private final CalculationServiceImpl calculationServiceMock = mock(CalculationServiceImpl.class);
 
     @Test
-    void givenNumbersToAdd_whenCalculateResult_shouldReturn200withResult() {
+    void givenNumbersToAdd_whenCalculateResult_shouldReturn200withResult() throws Throwable {
         ChallengeController challengeController = new ChallengeController(calculationServiceMock);
         when(calculationServiceMock.addNumbersAndApplyPercentage(numbersToAdd)).thenReturn(result);
 

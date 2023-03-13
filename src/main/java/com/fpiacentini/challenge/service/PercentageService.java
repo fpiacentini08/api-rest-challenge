@@ -2,5 +2,5 @@ package com.fpiacentini.challenge.service;
 
 public interface PercentageService {
 
-    Integer getPercentage();
+    Integer getPercentage() throws Throwable;
 }

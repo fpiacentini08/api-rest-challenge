@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Scope("singleton")
 public class PercentageServiceImpl implements PercentageService {
 
-    private ThirdPartyPercentageService thirdPartyPercentageService;
-    private ThirdPartyPercentageCache thirdPartyPercentageCache;
+    private final ThirdPartyPercentageService thirdPartyPercentageService;
+    private final ThirdPartyPercentageCache thirdPartyPercentageCache;
 
     public PercentageServiceImpl(@Autowired ThirdPartyPercentageService thirdPartyPercentageService, ThirdPartyPercentageCache thirdPartyPercentageCache) {
         this.thirdPartyPercentageService = thirdPartyPercentageService;
@@ -19,14 +19,14 @@ public class PercentageServiceImpl implements PercentageService {
 
 
     @Override
-    public Integer getPercentage() {
+    public Integer getPercentage() throws Throwable {
         if (!thirdPartyPercentageCache.hasBeenSet() || thirdPartyPercentageCache.isExpired()) {
             updateCachedPercentage();
         }
         return thirdPartyPercentageCache.getPercentage();
     }
 
-    private void updateCachedPercentage() {
+    private void updateCachedPercentage() throws Throwable {
         Integer percentage = thirdPartyPercentageService.getPercentage();
         thirdPartyPercentageCache.setPercentage(percentage);
     }

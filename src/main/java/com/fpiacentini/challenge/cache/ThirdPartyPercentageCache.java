@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class ThirdPartyPercentageCache {
 
 
-    private int secondsToExpire;
+    private final int secondsToExpire;
 
     private Integer percentage;
     private LocalDateTime settingTime;
