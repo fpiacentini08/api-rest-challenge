@@ -4,7 +4,6 @@ package com.fpiacentini.challenge.entity;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class ApiCall {
 
@@ -14,6 +13,16 @@ public class ApiCall {
     private final String data;
 
     private final LocalDateTime createdAt;
+
+    public ApiCall(String id, String data, LocalDateTime createdAt) {
+        this.id = id;
+        this.data = data;
+        this.createdAt = createdAt;
+    }
+
+    public static ApiCall create(String apiCallData) {
+        return new ApiCall(null, apiCallData, LocalDateTime.now());
+    }
 
     public String getId() {
         return id;
@@ -25,15 +34,5 @@ public class ApiCall {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public static ApiCall create(String apiCallData){
-        return new ApiCall(null, apiCallData, LocalDateTime.now());
-    }
-
-    public ApiCall(String id, String data, LocalDateTime createdAt){
-        this.id = id;
-        this.data = data;
-        this.createdAt = createdAt;
     }
 }

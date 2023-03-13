@@ -3,6 +3,7 @@ package com.fpiacentini.challenge.service;
 import com.fpiacentini.challenge.entity.ApiCall;
 import com.fpiacentini.challenge.repository.ApiCallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +17,7 @@ public class ApiCallServiceImpl implements ApiCallService {
     }
 
     @Override
+    @Async("threadPoolTaskExecutor")
     public void createApiCallHistory(String apiCallData) {
         apiCallRepository.save(ApiCall.create(apiCallData));
     }
