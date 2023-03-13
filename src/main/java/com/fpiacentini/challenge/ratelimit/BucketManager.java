@@ -13,7 +13,7 @@ import java.time.Duration;
 @Scope("singleton")
 public class BucketManager {
 
-    private Bucket bucket;
+    private final Bucket bucket;
 
     public BucketManager(@Value("${ratelimit.refill.tokens:3}") int tokensCapacity, @Value("${ratelimit.refill.time.seconds:60}") long refillSeconds) {
         Refill refill = Refill.intervally(tokensCapacity, Duration.ofSeconds(refillSeconds));

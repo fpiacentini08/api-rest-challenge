@@ -1,10 +1,11 @@
 package com.fpiacentini.challenge.client;
 
 import com.fpiacentini.challenge.model.ThirdPartyServiceResponse;
+import io.github.resilience4j.core.functions.CheckedFunction;
+import io.github.resilience4j.retry.Retry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -14,23 +15,28 @@ public class ThirdPartyPercentageServiceHttpClient extends BaseHttpClient {
                                                  @Value("${third.party.http.client.timeout.millis.read:2000}") Integer readTimeout,
                                                  @Value("${third.party.http.client.timeout.millis.write:2000}") Integer writeTimeout,
                                                  @Value("${third.party.http.client.timeout.millis.response:2000}") Integer responseTimeout,
+                                                 @Value("${third.party.http.client.retry.backoff.millis.interval:200}") Integer retryExponentialBackoffInterval,
+                                                 @Value("${third.party.http.client.retry.backoff.millis.multiplier:2}") Integer retryExponentialBackoffMultiplier,
+                                                 @Value("${third.party.http.client.retry.backoff.millis.max.attempts:3}") Integer retryExponentialBackoffIntervalMaxAttempts,
                                                  @Value("${third.party.http.client.url}") String url) {
-        super(connectionTimeout, readTimeout, writeTimeout, responseTimeout, url);
+        super(connectionTimeout, readTimeout, writeTimeout, responseTimeout, retryExponentialBackoffInterval, retryExponentialBackoffMultiplier, retryExponentialBackoffIntervalMaxAttempts, url);
     }
 
-    public Integer getPercentage() {
-        WebClient.RequestHeadersUriSpec<?> headersSpec = webClient.get();
+    public Integer getPercentage() throws Throwable {
+        Mono<ThirdPartyServiceResponse> thirdPartyServiceResponseMono = buildGetPercentageMono();
+        CheckedFunction<Integer, Integer> thirdPartyApiCallFunction = Retry
+                .decorateCheckedFunction(retry, response -> thirdPartyServiceResponseMono.block().value());
+        Integer response = thirdPartyApiCallFunction.apply(null);
+        return response;
+    }
 
-        Mono<ThirdPartyServiceResponse> thirdPartyServiceResponseMono = headersSpec.exchangeToMono(response -> {
+    private Mono<ThirdPartyServiceResponse> buildGetPercentageMono() {
+        return webClient.get().exchangeToMono(response -> {
             if (response.statusCode().equals(HttpStatus.OK)) {
                 return response.bodyToMono(ThirdPartyServiceResponse.class);
             } else {
-                return response.createException()
-                        .flatMap(Mono::error);
+                return Mono.error(new IllegalStateException());
             }
         });
-        return thirdPartyServiceResponseMono.block().value();
-
-
     }
 }

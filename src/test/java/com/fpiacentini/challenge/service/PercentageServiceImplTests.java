@@ -13,7 +13,7 @@ class PercentageServiceImplTests {
     private final ThirdPartyPercentageServiceImpl thirdPartyPercentageServiceMock = mock(ThirdPartyPercentageServiceImpl.class);
 
     @Test
-    void givenThirdPartyServiceResponse_whenGetPercentage_shouldReturnTheSameNumber() {
+    void givenThirdPartyServiceResponse_whenGetPercentage_shouldReturnTheSameNumber() throws Throwable {
         final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(1800);
         final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
@@ -23,7 +23,7 @@ class PercentageServiceImplTests {
     }
 
     @Test
-    void givenCachedValueNotExpired_whenGetPercentage_shouldReturnTheCachedNumber() {
+    void givenCachedValueNotExpired_whenGetPercentage_shouldReturnTheCachedNumber() throws Throwable {
         final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(1800);
         final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
@@ -34,7 +34,7 @@ class PercentageServiceImplTests {
     }
 
     @Test
-    void givenCachedValueExpired_whenGetPercentage_shouldReturnTheThirdPartyServiceReturnedNumber() {
+    void givenCachedValueExpired_whenGetPercentage_shouldReturnTheThirdPartyServiceReturnedNumber() throws Throwable {
         final ThirdPartyPercentageCache thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(0);
         final PercentageServiceImpl percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
         when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);

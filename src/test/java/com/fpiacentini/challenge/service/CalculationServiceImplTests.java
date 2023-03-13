@@ -15,7 +15,7 @@ class CalculationServiceImplTests {
     private final CalculationServiceImpl calculationService = new CalculationServiceImpl(percentageService);
 
     @Test
-    void givenZeroAndZero_whenAddNumbersAndApplyPercentage_shouldReturnZero() {
+    void givenZeroAndZero_whenAddNumbersAndApplyPercentage_shouldReturnZero() throws Throwable {
         NumbersToAdd numbersToAdd = new NumbersToAdd(0, 0);
         Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
         assertEquals(0, result.value());
@@ -23,7 +23,7 @@ class CalculationServiceImplTests {
     }
 
     @Test
-    void given5And5And10Percentage_whenAddNumbersAndApplyPercentage_shouldReturn11() {
+    void given5And5And10Percentage_whenAddNumbersAndApplyPercentage_shouldReturn11() throws Throwable {
         NumbersToAdd numbersToAdd = new NumbersToAdd(5, 5);
         when(percentageService.getPercentage()).thenReturn(10);
         Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
@@ -32,7 +32,7 @@ class CalculationServiceImplTests {
     }
 
     @Test
-    void given147And5523And99Percentage_whenAddNumbersAndApplyPercentage_shouldReturn13dot44() {
+    void given147And5523And99Percentage_whenAddNumbersAndApplyPercentage_shouldReturn13dot44() throws Throwable {
         NumbersToAdd numbersToAdd = new NumbersToAdd(147, 5523);
         when(percentageService.getPercentage()).thenReturn(99);
         Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
@@ -41,7 +41,7 @@ class CalculationServiceImplTests {
     }
 
     @Test
-    void given7And12And42Percentage_whenAddNumbersAndApplyPercentage_shouldReturn13dot44() {
+    void given7And12And42Percentage_whenAddNumbersAndApplyPercentage_shouldReturn13dot44() throws Throwable {
         NumbersToAdd numbersToAdd = new NumbersToAdd(7, 12);
         when(percentageService.getPercentage()).thenReturn(42);
         Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
