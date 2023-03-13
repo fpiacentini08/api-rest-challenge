@@ -16,8 +16,8 @@ public class ThirdPartyPercentageServiceHttpClient extends BaseHttpClient {
                                                  @Value("${third.party.http.client.timeout.millis.write:2000}") Integer writeTimeout,
                                                  @Value("${third.party.http.client.timeout.millis.response:2000}") Integer responseTimeout,
                                                  @Value("${third.party.http.client.retry.backoff.millis.interval:200}") Integer retryExponentialBackoffInterval,
-                                                 @Value("${third.party.http.client.retry.backoff.millis.multiplier:2}") Integer retryExponentialBackoffMultiplier,
-                                                 @Value("${third.party.http.client.retry.backoff.millis.max.attempts:3}") Integer retryExponentialBackoffIntervalMaxAttempts,
+                                                 @Value("${third.party.http.client.retry.backoff.multiplier:2}") Integer retryExponentialBackoffMultiplier,
+                                                 @Value("${third.party.http.client.retry.backoff.max.attempts:3}") Integer retryExponentialBackoffIntervalMaxAttempts,
                                                  @Value("${third.party.http.client.url}") String url) {
         super(connectionTimeout, readTimeout, writeTimeout, responseTimeout, retryExponentialBackoffInterval, retryExponentialBackoffMultiplier, retryExponentialBackoffIntervalMaxAttempts, url);
     }
