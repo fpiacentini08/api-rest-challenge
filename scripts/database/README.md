@@ -2,7 +2,8 @@
 
 This folder contains a docker compose file to start a PSQL 15.2 database as a Docker container.
 The container exposes port 8087.
-A database called history is created by default.
+A database called history is created by default. 
+THe initial tables are created as well.
 
 ## Prerequisites
 - Docker running
@@ -11,10 +12,12 @@ A database called history is created by default.
 ## Running locally
 To run the container locally, execute the following:
 ```
-docker-compose --file docker-compose-psql.yml up
+./start-db.sh
 ```
 
 To stop the container, simply press CTRL + C.
+
+An orphan container will still be there. You can execute:
 ```aidl
 docker rm -f database_db_1
 docker volume rm database_db
