@@ -2,6 +2,8 @@ package com.fpiacentini.challenge.controller;
 
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
+import com.fpiacentini.challenge.service.ApiCallService;
+import com.fpiacentini.challenge.service.ApiCallServiceImpl;
 import com.fpiacentini.challenge.service.CalculationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,11 @@ public class ChallengeControllerTest {
     private static final NumbersToAdd numbersToAdd = new NumbersToAdd(2, 2);
     private static final Result result = new Result(15d);
     private final CalculationServiceImpl calculationServiceMock = mock(CalculationServiceImpl.class);
+    private final ApiCallServiceImpl apiCallServiceMock = mock(ApiCallServiceImpl.class);
 
     @Test
     void givenNumbersToAdd_whenCalculateResult_shouldReturn200withResult() throws Throwable {
-        ChallengeController challengeController = new ChallengeController(calculationServiceMock);
+        ChallengeController challengeController = new ChallengeController(calculationServiceMock, apiCallServiceMock);
         when(calculationServiceMock.addNumbersAndApplyPercentage(numbersToAdd)).thenReturn(result);
 
         ResponseEntity<Result> response = challengeController.calculateResult(numbersToAdd);
