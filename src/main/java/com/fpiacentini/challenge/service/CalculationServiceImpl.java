@@ -15,7 +15,8 @@ public class CalculationServiceImpl implements CalculationService{
 
     PercentageService percentageService;
 
-    public CalculationServiceImpl(@Autowired PercentageService percentageService){
+    @Autowired
+    public CalculationServiceImpl(PercentageService percentageService){
         this.percentageService = percentageService;
     }
 
