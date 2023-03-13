@@ -21,8 +21,9 @@ public class ChallengeController {
 
     ApiCallService apiCallService;
 
+
     @Autowired
-    public ChallengeController( CalculationService calculationService, ApiCallService apiCallService) {
+    public ChallengeController(CalculationService calculationService, ApiCallService apiCallService) {
         this.calculationService = calculationService;
         this.apiCallService = apiCallService;
     }
@@ -32,7 +33,8 @@ public class ChallengeController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Result> calculateResult(@RequestBody NumbersToAdd numbersToAdd) throws Throwable {
         Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
-        apiCallService.createApiCallHistory(numbersToAdd.toString());
+        apiCallService.createApiCallHistory(numbersToAdd, result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
 }

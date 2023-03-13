@@ -1,8 +1,10 @@
 package com.fpiacentini.challenge.service;
 
-import com.fpiacentini.challenge.model.ApiCall;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fpiacentini.challenge.model.NumbersToAdd;
+import com.fpiacentini.challenge.model.Result;
 
 public interface ApiCallService {
 
-    void createApiCallHistory(String apiCallData);
+    void createApiCallHistory(NumbersToAdd numbersToAdd, Result result) throws JsonProcessingException;
 }

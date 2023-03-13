@@ -23,16 +23,4 @@ public class ApiCall {
     public static ApiCall create(String apiCallData) {
         return new ApiCall(null, apiCallData, LocalDateTime.now());
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
 }
