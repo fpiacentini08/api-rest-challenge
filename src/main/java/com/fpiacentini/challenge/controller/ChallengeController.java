@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("challenge")
@@ -44,8 +43,9 @@ public class ChallengeController {
 
     @GetMapping(path = "",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CustomPage<ApiCallModel>> getHistoricApiCAlls() throws Throwable {
-        CustomPage<ApiCallModel> apiCallHistory = apiCallService.getApiCallHistory();
+    public ResponseEntity<CustomPage<ApiCallModel>> getHistoricApiCalls(
+            @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        CustomPage<ApiCallModel> apiCallHistory = apiCallService.getApiCallHistory(pageNumber, pageSize);
         return new ResponseEntity<>(apiCallHistory, HttpStatus.OK);
     }
 

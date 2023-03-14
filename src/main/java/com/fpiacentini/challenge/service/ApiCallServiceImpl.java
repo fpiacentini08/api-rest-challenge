@@ -17,10 +17,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 @Service
 public class ApiCallServiceImpl implements ApiCallService {
 
@@ -57,11 +53,11 @@ public class ApiCallServiceImpl implements ApiCallService {
     }
 
     @Override
-    public CustomPage<ApiCallModel> getApiCallHistory() {
+    public CustomPage<ApiCallModel> getApiCallHistory(Integer pageNumber, Integer pageSize) {
         Sort sort = Sort.by(Sort.Direction.ASC, "createdAt");
-        PageRequest pageable = PageRequest.of(0, 20, sort);
+        PageRequest pageable = PageRequest.of(pageNumber, pageSize, sort);
         Page<ApiCall> apiCallPage = apiCallPagingAndSortingRepository.findAll(pageable);
-        return new CustomPage<>(ApiCallEntityToApiCallModelTransformer.transform(apiCallPage.getContent()),apiCallPage.getTotalElements(), apiCallPage.getNumber(), apiCallPage.getSize() );
+        return new CustomPage<>(ApiCallEntityToApiCallModelTransformer.transform(apiCallPage.getContent()), apiCallPage.getTotalElements(), apiCallPage.getNumber(), apiCallPage.getSize());
     }
 
 
