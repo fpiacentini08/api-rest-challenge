@@ -1,17 +1,13 @@
 package com.fpiacentini.challenge.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fpiacentini.challenge.exception.NoPercentageAvailableException;
 import com.fpiacentini.challenge.model.ApiCallModel;
 import com.fpiacentini.challenge.model.CustomPage;
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
-import com.fpiacentini.challenge.service.ApiCallService;
 import com.fpiacentini.challenge.service.ApiCallServiceImpl;
 import com.fpiacentini.challenge.service.CalculationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 
@@ -35,7 +31,7 @@ public class ChallengeControllerTest {
 
         var response = challengeController.calculateResult(numbersToAdd);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(result, response.getBody());
         verify(calculationServiceMock, times(1)).addNumbersAndApplyPercentage(numbersToAdd);
     }
