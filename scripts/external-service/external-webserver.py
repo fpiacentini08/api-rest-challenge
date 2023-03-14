@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import random
 import json
 
-hName = "localhost"
+hName = "127.0.0.1"
 Port = 8081
 class PercentageServer (BaseHTTPRequestHandler):
     def do_GET (self):
