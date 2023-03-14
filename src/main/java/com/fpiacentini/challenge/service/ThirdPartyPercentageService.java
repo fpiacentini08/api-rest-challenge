@@ -1,6 +1,8 @@
 package com.fpiacentini.challenge.service;
 
+import java.util.Optional;
+
 public interface ThirdPartyPercentageService {
 
-    Integer getPercentage() throws Throwable;
+    Optional<Integer> getPercentage();
 }

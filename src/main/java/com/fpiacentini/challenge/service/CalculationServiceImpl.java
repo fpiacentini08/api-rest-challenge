@@ -1,5 +1,6 @@
 package com.fpiacentini.challenge.service;
 
+import com.fpiacentini.challenge.exception.NoPercentageAvailableException;
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,17 @@ public class CalculationServiceImpl implements CalculationService{
     }
 
     @Override
-    public Result addNumbersAndApplyPercentage(NumbersToAdd numbersToAdd) throws Throwable {
-        var percentageToApply = new BigDecimal(percentageService.getPercentage() + 100);
+    public Result addNumbersAndApplyPercentage(NumbersToAdd numbersToAdd) throws NoPercentageAvailableException {
+        var percentageToApply = percentageService.getPercentage();
+        var resultValue = makeCalculation( numbersToAdd, percentageToApply);
+        return new Result(resultValue);
+    }
+
+    private Double makeCalculation(NumbersToAdd numbersToAdd, Integer percentage){
         var firstNumber = new BigDecimal(numbersToAdd.firstNumber().doubleValue());
         var secondNumber = new BigDecimal(numbersToAdd.secondNumber().doubleValue());
-        var resultValue = firstNumber.add(secondNumber).multiply(percentageToApply).divide(new BigDecimal(100));
+        var resultValue = firstNumber.add(secondNumber).multiply(new BigDecimal(percentage + 100)).divide(new BigDecimal(100));
         resultValue.setScale(2, RoundingMode.UNNECESSARY);
-        return new Result(resultValue.doubleValue());
+        return resultValue.doubleValue();
     }
 }

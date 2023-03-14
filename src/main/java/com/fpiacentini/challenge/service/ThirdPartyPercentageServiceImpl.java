@@ -4,6 +4,8 @@ import com.fpiacentini.challenge.client.ThirdPartyPercentageServiceHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ThirdPartyPercentageServiceImpl implements ThirdPartyPercentageService {
 
@@ -13,7 +15,13 @@ public class ThirdPartyPercentageServiceImpl implements ThirdPartyPercentageServ
         this.thirdPartyPercentageServiceHttpClient = thirdPartyPercentageServiceHttpClient;
     }
 
-    public Integer getPercentage() throws Throwable {
-        return thirdPartyPercentageServiceHttpClient.getPercentage();
+    public Optional<Integer> getPercentage() {
+        Integer percentage = null;
+        try {
+            percentage = thirdPartyPercentageServiceHttpClient.getPercentage();
+        } catch (Throwable e) {
+//            Do nothing
+        }
+        return Optional.ofNullable(percentage);
     }
 }

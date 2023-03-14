@@ -1,5 +1,7 @@
 package com.fpiacentini.challenge.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fpiacentini.challenge.exception.NoPercentageAvailableException;
 import com.fpiacentini.challenge.model.ApiCallModel;
 import com.fpiacentini.challenge.model.CustomPage;
 import com.fpiacentini.challenge.model.NumbersToAdd;
@@ -35,7 +37,7 @@ public class ChallengeController {
     @PostMapping(path = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Result> calculateResult(@RequestBody NumbersToAdd numbersToAdd) throws Throwable {
+    public ResponseEntity<Result> calculateResult(@RequestBody NumbersToAdd numbersToAdd) throws NoPercentageAvailableException, JsonProcessingException {
         var result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
         apiCallService.createApiCallHistory(numbersToAdd, result);
         return new ResponseEntity<>(result, HttpStatus.OK);

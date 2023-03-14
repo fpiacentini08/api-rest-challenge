@@ -1,5 +1,6 @@
 package com.fpiacentini.challenge.client;
 
+import com.fpiacentini.challenge.exception.NoResponseFromThirdPartyServiceException;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterAll;
@@ -50,7 +51,7 @@ public class ThirdPartyPercentageServiceHttpClientTests {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).setBody("{}"));
         mockWebServer.enqueue(new MockResponse().setResponseCode(500).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).setBody("{}"));
         mockWebServer.enqueue(new MockResponse().setResponseCode(500).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).setBody("{}"));
-        Assertions.assertThrows(IllegalStateException.class, () -> {
+        Assertions.assertThrows(NoResponseFromThirdPartyServiceException.class, () -> {
             thirdPartyPercentageServiceHttpClient.getPercentage();
         });
     }
