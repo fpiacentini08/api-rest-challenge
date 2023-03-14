@@ -11,7 +11,6 @@ import com.fpiacentini.challenge.repository.ApiCallPagingAndSortingRepository;
 import com.fpiacentini.challenge.repository.ApiCallRepository;
 import com.fpiacentini.challenge.transformer.ApiCallEntityToApiCallModelTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
@@ -20,14 +19,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApiCallServiceImpl implements ApiCallService {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
     private final ApiCallRepository apiCallRepository;
     private final ApiCallPagingAndSortingRepository apiCallPagingAndSortingRepository;
 
     @Autowired
-    public ApiCallServiceImpl(ApiCallRepository apiCallRepository, ApiCallPagingAndSortingRepository apiCallPagingAndSortingRepository) {
+    public ApiCallServiceImpl(ApiCallRepository apiCallRepository, ApiCallPagingAndSortingRepository apiCallPagingAndSortingRepository, ObjectMapper mapper) {
         this.apiCallRepository = apiCallRepository;
         this.apiCallPagingAndSortingRepository = apiCallPagingAndSortingRepository;
+        this.mapper = mapper;
     }
 
 
