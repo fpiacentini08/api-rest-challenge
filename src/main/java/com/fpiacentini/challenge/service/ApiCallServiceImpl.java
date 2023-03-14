@@ -47,16 +47,16 @@ public class ApiCallServiceImpl implements ApiCallService {
     }
 
     private String convertApiDataToString(NumbersToAdd numbersToAdd, Result result) throws JsonProcessingException {
-        String numbersToAddJson = mapper.writeValueAsString(numbersToAdd);
-        String resultJson = mapper.writeValueAsString(result);
+        var numbersToAddJson = mapper.writeValueAsString(numbersToAdd);
+        var resultJson = mapper.writeValueAsString(result);
         return String.format("{\"request\":%s,\"response\":%s}", numbersToAddJson, resultJson);
     }
 
     @Override
     public CustomPage<ApiCallModel> getApiCallHistory(Integer pageNumber, Integer pageSize) {
-        Sort sort = Sort.by(Sort.Direction.ASC, "createdAt");
-        PageRequest pageable = PageRequest.of(pageNumber, pageSize, sort);
-        Page<ApiCall> apiCallPage = apiCallPagingAndSortingRepository.findAll(pageable);
+        var sort = Sort.by(Sort.Direction.ASC, "createdAt");
+        var pageable = PageRequest.of(pageNumber, pageSize, sort);
+        var apiCallPage = apiCallPagingAndSortingRepository.findAll(pageable);
         return new CustomPage<>(ApiCallEntityToApiCallModelTransformer.transform(apiCallPage.getContent()), apiCallPage.getTotalElements(), apiCallPage.getNumber(), apiCallPage.getSize());
     }
 

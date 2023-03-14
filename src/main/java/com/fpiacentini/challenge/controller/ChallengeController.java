@@ -36,7 +36,7 @@ public class ChallengeController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Result> calculateResult(@RequestBody NumbersToAdd numbersToAdd) throws Throwable {
-        Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
+        var result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
         apiCallService.createApiCallHistory(numbersToAdd, result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -45,7 +45,7 @@ public class ChallengeController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomPage<ApiCallModel>> getHistoricApiCalls(
             @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
-        CustomPage<ApiCallModel> apiCallHistory = apiCallService.getApiCallHistory(pageNumber, pageSize);
+        var apiCallHistory = apiCallService.getApiCallHistory(pageNumber, pageSize);
         return new ResponseEntity<>(apiCallHistory, HttpStatus.OK);
     }
 

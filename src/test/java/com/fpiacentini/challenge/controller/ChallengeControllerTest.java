@@ -24,10 +24,10 @@ public class ChallengeControllerTest {
 
     @Test
     void givenNumbersToAdd_whenCalculateResult_shouldReturn200withResult() throws Throwable {
-        ChallengeController challengeController = new ChallengeController(calculationServiceMock, apiCallServiceMock);
+        var challengeController = new ChallengeController(calculationServiceMock, apiCallServiceMock);
         when(calculationServiceMock.addNumbersAndApplyPercentage(numbersToAdd)).thenReturn(result);
 
-        ResponseEntity<Result> response = challengeController.calculateResult(numbersToAdd);
+        var response = challengeController.calculateResult(numbersToAdd);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(result, response.getBody());

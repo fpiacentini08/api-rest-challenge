@@ -27,7 +27,7 @@ public class PercentageServiceImpl implements PercentageService {
     }
 
     private void updateCachedPercentage() throws Throwable {
-        Integer percentage = thirdPartyPercentageService.getPercentage();
+        var percentage = thirdPartyPercentageService.getPercentage();
         thirdPartyPercentageCache.setPercentage(percentage);
     }
 }
