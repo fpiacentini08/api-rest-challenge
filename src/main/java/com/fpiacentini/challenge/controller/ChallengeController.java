@@ -1,6 +1,7 @@
 package com.fpiacentini.challenge.controller;
 
 import com.fpiacentini.challenge.model.ApiCallModel;
+import com.fpiacentini.challenge.model.CustomPage;
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
 import com.fpiacentini.challenge.service.ApiCallService;
@@ -43,8 +44,8 @@ public class ChallengeController {
 
     @GetMapping(path = "",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ApiCallModel>> getHistoricApiCAlls() throws Throwable {
-        List<ApiCallModel> apiCallHistory = apiCallService.getApiCallHistory();
+    public ResponseEntity<CustomPage<ApiCallModel>> getHistoricApiCAlls() throws Throwable {
+        CustomPage<ApiCallModel> apiCallHistory = apiCallService.getApiCallHistory();
         return new ResponseEntity<>(apiCallHistory, HttpStatus.OK);
     }
 
