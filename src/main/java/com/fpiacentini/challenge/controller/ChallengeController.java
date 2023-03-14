@@ -1,5 +1,6 @@
 package com.fpiacentini.challenge.controller;
 
+import com.fpiacentini.challenge.model.ApiCallModel;
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
 import com.fpiacentini.challenge.service.ApiCallService;
@@ -9,9 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("challenge")
@@ -35,6 +39,13 @@ public class ChallengeController {
         Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
         apiCallService.createApiCallHistory(numbersToAdd, result);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ApiCallModel>> getHistoricApiCAlls() throws Throwable {
+        List<ApiCallModel> apiCallHistory = apiCallService.getApiCallHistory();
+        return new ResponseEntity<>(apiCallHistory, HttpStatus.OK);
     }
 
 }
