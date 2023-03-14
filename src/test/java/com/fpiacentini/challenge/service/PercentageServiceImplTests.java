@@ -1,6 +1,8 @@
 package com.fpiacentini.challenge.service;
 
 import com.fpiacentini.challenge.cache.ThirdPartyPercentageCache;
+import com.fpiacentini.challenge.exception.NoPercentageAvailableException;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -44,6 +46,15 @@ class PercentageServiceImplTests {
         var percentage = percentageService.getPercentage();
         assertEquals(20, percentage);
         verify(thirdPartyPercentageServiceMock, times(1)).getPercentage();
+    }
+
+    @Test
+    void givenCacheEmptyAndNoResponseFromThirdPartyService_whenGetPercentage_shouldThrowNoPercentageAvailableException() throws Throwable {
+        final var thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(0);
+        final var percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
+        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(Optional.ofNullable(null));
+        Assert.assertThrows(NoPercentageAvailableException.class , ()-> percentageService.getPercentage());
+
     }
 
 }

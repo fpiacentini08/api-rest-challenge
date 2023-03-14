@@ -1,5 +1,7 @@
 package com.fpiacentini.challenge.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fpiacentini.challenge.exception.NoPercentageAvailableException;
 import com.fpiacentini.challenge.model.ApiCallModel;
 import com.fpiacentini.challenge.model.CustomPage;
 import com.fpiacentini.challenge.model.NumbersToAdd;

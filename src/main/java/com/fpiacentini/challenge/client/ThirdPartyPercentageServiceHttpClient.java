@@ -1,6 +1,6 @@
 package com.fpiacentini.challenge.client;
 
-import com.fpiacentini.challenge.exception.NoResponseFromThirdPartyService;
+import com.fpiacentini.challenge.exception.NoResponseFromThirdPartyServiceException;
 import com.fpiacentini.challenge.model.ThirdPartyServiceResponse;
 import io.github.resilience4j.retry.Retry;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +35,7 @@ public class ThirdPartyPercentageServiceHttpClient extends BaseHttpClient {
             if (response.statusCode().equals(HttpStatus.OK)) {
                 return response.bodyToMono(ThirdPartyServiceResponse.class);
             } else {
-                return Mono.error(new NoResponseFromThirdPartyService());
+                return Mono.error(new NoResponseFromThirdPartyServiceException());
             }
         });
     }
