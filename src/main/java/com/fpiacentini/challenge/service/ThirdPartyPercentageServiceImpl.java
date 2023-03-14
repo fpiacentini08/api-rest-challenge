@@ -20,7 +20,7 @@ public class ThirdPartyPercentageServiceImpl implements ThirdPartyPercentageServ
         try {
             percentage = thirdPartyPercentageServiceHttpClient.getPercentage();
         } catch (Throwable e) {
-            System.out.println(e.getMessage());
+//            Do nothing
         }
         return Optional.ofNullable(percentage);
     }

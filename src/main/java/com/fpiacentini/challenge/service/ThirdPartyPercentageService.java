@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface ThirdPartyPercentageService {
 
-    Optional<Integer> getPercentage() throws Throwable;
+    Optional<Integer> getPercentage();
 }

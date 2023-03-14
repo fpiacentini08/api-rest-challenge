@@ -20,14 +20,14 @@ public class PercentageServiceImpl implements PercentageService {
 
 
     @Override
-    public Integer getPercentage() throws Throwable {
+    public Integer getPercentage() throws NoPercentageAvailableException{
         if (!thirdPartyPercentageCache.hasBeenSet() || thirdPartyPercentageCache.isExpired()) {
             updateCachedPercentage();
         }
         return thirdPartyPercentageCache.getPercentage();
     }
 
-    private void updateCachedPercentage() throws Throwable {
+    private void updateCachedPercentage() throws NoPercentageAvailableException{
         var percentage = thirdPartyPercentageService.getPercentage();
         if(percentage.isEmpty()){
             if(thirdPartyPercentageCache.hasBeenSet()){
