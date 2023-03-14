@@ -8,10 +8,24 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=history
     ports:
-      - '8087:5432'
-    volumes: 
+      - '5432:5432'
+    volumes:
       - db:/var/lib/postgresql/data
       - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  api:
+    image: api-rest-challenge:latest
+    depends_on:
+      - db
+    environment:
+      - spring.datasource.url=jdbc:postgresql://db:5432/history
+      - spring.datasource.username=postgres
+      - spring.datasource.password=postgres
+    ports:
+      - '8080:8080'
+    links:
+      - db
+
 volumes:
   db:
     driver: local
+
