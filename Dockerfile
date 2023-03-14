@@ -1,4 +1,4 @@
-FROM openjdk:17
+FROM openjdk:17-alpine
 WORKDIR /tmp
 
 COPY ./target/challenge-0.0.1-SNAPSHOT.jar .
