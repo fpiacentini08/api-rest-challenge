@@ -26,7 +26,7 @@ public class RateLimitFilterTests {
 
     @Test
     void givenBucketWithTokens_whenExecuteFilter_shouldNotModifyTheResponse() throws ServletException, IOException {
-        RateLimitFilter rateLimitFilter = new RateLimitFilter(bucketManager);
+        var rateLimitFilter = new RateLimitFilter(bucketManager);
         when(bucketManager.tryConsume()).thenReturn(true);
 
         rateLimitFilter.doFilterInternal(request, response, filterChain);
@@ -40,7 +40,7 @@ public class RateLimitFilterTests {
 
     @Test
     void givenBucketWithNoTokens_whenExecuteFilter_shouldModifyTheResponse() throws ServletException, IOException {
-        RateLimitFilter rateLimitFilter = new RateLimitFilter(bucketManager);
+        var rateLimitFilter = new RateLimitFilter(bucketManager);
         when(bucketManager.tryConsume()).thenReturn(false);
         when(response.getWriter()).thenReturn(printWriter);
         when(printWriter.append(any())).thenReturn(printWriter);

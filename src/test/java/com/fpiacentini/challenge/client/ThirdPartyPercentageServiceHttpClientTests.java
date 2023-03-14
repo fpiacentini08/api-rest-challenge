@@ -33,7 +33,7 @@ public class ThirdPartyPercentageServiceHttpClientTests {
     @Test
     void givenResponseFromThirdPartyService20_whenGetPercentage_shouldReturn20() throws Throwable {
         mockWebServer.enqueue(new MockResponse().setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).setBody("{\"value\":20}"));
-        Integer percentage = thirdPartyPercentageServiceHttpClient.getPercentage();
+        var percentage = thirdPartyPercentageServiceHttpClient.getPercentage();
         assertEquals(20, percentage);
     }
 
@@ -41,7 +41,7 @@ public class ThirdPartyPercentageServiceHttpClientTests {
     void givenOneFailedResponseFromThirdPartyServiceAndThenGet20_whenGetPercentage_shouldReturn20() throws Throwable {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).setBody("{}"));
         mockWebServer.enqueue(new MockResponse().setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).setBody("{\"value\":20}"));
-        Integer percentage = thirdPartyPercentageServiceHttpClient.getPercentage();
+        var percentage = thirdPartyPercentageServiceHttpClient.getPercentage();
         assertEquals(20, percentage);
     }
 

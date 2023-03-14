@@ -22,10 +22,10 @@ public class CalculationServiceImpl implements CalculationService{
 
     @Override
     public Result addNumbersAndApplyPercentage(NumbersToAdd numbersToAdd) throws Throwable {
-        BigDecimal percentageToApply = new BigDecimal(percentageService.getPercentage() + 100);
-        BigDecimal firstNumber = new BigDecimal(numbersToAdd.firstNumber().doubleValue());
-        BigDecimal secondNumber = new BigDecimal(numbersToAdd.secondNumber().doubleValue());
-        BigDecimal resultValue = firstNumber.add(secondNumber).multiply(percentageToApply).divide(new BigDecimal(100));
+        var percentageToApply = new BigDecimal(percentageService.getPercentage() + 100);
+        var firstNumber = new BigDecimal(numbersToAdd.firstNumber().doubleValue());
+        var secondNumber = new BigDecimal(numbersToAdd.secondNumber().doubleValue());
+        var resultValue = firstNumber.add(secondNumber).multiply(percentageToApply).divide(new BigDecimal(100));
         resultValue.setScale(2, RoundingMode.UNNECESSARY);
         return new Result(resultValue.doubleValue());
     }

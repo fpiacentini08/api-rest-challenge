@@ -1,6 +1,7 @@
 package com.fpiacentini.challenge.controller;
 
 import com.fpiacentini.challenge.model.ApiCallModel;
+import com.fpiacentini.challenge.model.CustomPage;
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
 import com.fpiacentini.challenge.service.ApiCallService;
@@ -14,8 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("challenge")
@@ -36,15 +36,16 @@ public class ChallengeController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Result> calculateResult(@RequestBody NumbersToAdd numbersToAdd) throws Throwable {
-        Result result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
+        var result = calculationService.addNumbersAndApplyPercentage(numbersToAdd);
         apiCallService.createApiCallHistory(numbersToAdd, result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(path = "",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ApiCallModel>> getHistoricApiCAlls() throws Throwable {
-        List<ApiCallModel> apiCallHistory = apiCallService.getApiCallHistory();
+    public ResponseEntity<CustomPage<ApiCallModel>> getHistoricApiCalls(
+            @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        var apiCallHistory = apiCallService.getApiCallHistory(pageNumber, pageSize);
         return new ResponseEntity<>(apiCallHistory, HttpStatus.OK);
     }
 

@@ -40,7 +40,7 @@ public abstract class BaseHttpClient {
             Integer readTimeout,
             Integer writeTimeout,
             String url) {
-        HttpClient httpClient = HttpClient.create()
+        var httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectionTimeout)
                 .responseTimeout(Duration.ofMillis(responseTimeout))
                 .doOnConnected(conn ->
@@ -57,10 +57,10 @@ public abstract class BaseHttpClient {
     }
 
     private Retry buildRetryMechanism(Integer retryExponentialBackoffInterval, Integer retryExponentialBackoffMultiplier, Integer retryExponentialBackoffIntervalMaxAttempts) {
-        IntervalFunction exponentialBackoffIntervalFunction =
+        var exponentialBackoffIntervalFunction =
                 IntervalFunction.ofExponentialBackoff(retryExponentialBackoffInterval, retryExponentialBackoffMultiplier);
 
-        RetryConfig retryConfiguration = RetryConfig.custom()
+        var retryConfiguration = RetryConfig.custom()
                 .maxAttempts(retryExponentialBackoffIntervalMaxAttempts)
                 .intervalFunction(exponentialBackoffIntervalFunction)
                 .retryExceptions(IllegalStateException.class)

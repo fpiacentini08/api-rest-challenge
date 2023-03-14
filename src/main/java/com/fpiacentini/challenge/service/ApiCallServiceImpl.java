@@ -4,18 +4,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fpiacentini.challenge.entity.ApiCall;
 import com.fpiacentini.challenge.model.ApiCallModel;
+import com.fpiacentini.challenge.model.CustomPage;
 import com.fpiacentini.challenge.model.NumbersToAdd;
 import com.fpiacentini.challenge.model.Result;
 import com.fpiacentini.challenge.repository.ApiCallPagingAndSortingRepository;
 import com.fpiacentini.challenge.repository.ApiCallRepository;
 import com.fpiacentini.challenge.transformer.ApiCallEntityToApiCallModelTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 @Service
 public class ApiCallServiceImpl implements ApiCallService {
@@ -47,17 +47,17 @@ public class ApiCallServiceImpl implements ApiCallService {
     }
 
     private String convertApiDataToString(NumbersToAdd numbersToAdd, Result result) throws JsonProcessingException {
-        String numbersToAddJson = mapper.writeValueAsString(numbersToAdd);
-        String resultJson = mapper.writeValueAsString(result);
+        var numbersToAddJson = mapper.writeValueAsString(numbersToAdd);
+        var resultJson = mapper.writeValueAsString(result);
         return String.format("{\"request\":%s,\"response\":%s}", numbersToAddJson, resultJson);
     }
 
     @Override
-    public List<ApiCallModel> getApiCallHistory() {
-        Iterator<ApiCall> apiCallEntitiesIterator = apiCallPagingAndSortingRepository.findAll().iterator();
-        List<ApiCall> apiCallEntitiesList = new ArrayList<>();
-        apiCallEntitiesIterator.forEachRemaining(apiCallEntitiesList::add);
-        return ApiCallEntityToApiCallModelTransformer.transform(apiCallEntitiesList);
+    public CustomPage<ApiCallModel> getApiCallHistory(Integer pageNumber, Integer pageSize) {
+        var sort = Sort.by(Sort.Direction.ASC, "createdAt");
+        var pageable = PageRequest.of(pageNumber, pageSize, sort);
+        var apiCallPage = apiCallPagingAndSortingRepository.findAll(pageable);
+        return new CustomPage<>(ApiCallEntityToApiCallModelTransformer.transform(apiCallPage.getContent()), apiCallPage.getTotalElements(), apiCallPage.getNumber(), apiCallPage.getSize());
     }
 
 

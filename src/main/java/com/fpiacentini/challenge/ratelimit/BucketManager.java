@@ -16,9 +16,9 @@ public class BucketManager {
     private final Bucket bucket;
 
     public BucketManager(@Value("${ratelimit.refill.tokens:3}") int tokensCapacity, @Value("${ratelimit.refill.time.seconds:60}") long refillSeconds) {
-        Refill refill = Refill.intervally(tokensCapacity, Duration.ofSeconds(refillSeconds));
-        Bandwidth limit = Bandwidth.classic(tokensCapacity, refill);
-        Bucket bucket = Bucket.builder().addLimit(limit).build();
+        var refill = Refill.intervally(tokensCapacity, Duration.ofSeconds(refillSeconds));
+        var limit = Bandwidth.classic(tokensCapacity, refill);
+        var bucket = Bucket.builder().addLimit(limit).build();
         this.bucket = bucket;
     }
 

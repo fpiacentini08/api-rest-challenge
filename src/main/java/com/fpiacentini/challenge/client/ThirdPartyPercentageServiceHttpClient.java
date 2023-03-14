@@ -23,10 +23,10 @@ public class ThirdPartyPercentageServiceHttpClient extends BaseHttpClient {
     }
 
     public Integer getPercentage() throws Throwable {
-        Mono<ThirdPartyServiceResponse> thirdPartyServiceResponseMono = buildGetPercentageMono();
-        CheckedFunction<Integer, Integer> thirdPartyApiCallFunction = Retry
+        var thirdPartyServiceResponseMono = buildGetPercentageMono();
+        var thirdPartyApiCallFunction = Retry
                 .decorateCheckedFunction(retry, response -> thirdPartyServiceResponseMono.block().value());
-        Integer response = thirdPartyApiCallFunction.apply(null);
+        var response = thirdPartyApiCallFunction.apply(null);
         return response;
     }
 

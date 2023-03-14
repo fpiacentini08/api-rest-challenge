@@ -15,7 +15,7 @@ public class ThirdPartyPercentageServiceImplTests {
     @Test
     void givenExternalServiceResponse20_whenGetPercentage_shouldReturn20() throws Throwable {
         when(thirdPartyPercentageServiceHttpClientMock.getPercentage()).thenReturn(20);
-        Integer percentage = thirdPartyPercentageService.getPercentage();
+        var percentage = thirdPartyPercentageService.getPercentage();
         assertEquals(20, percentage);
     }
 }
