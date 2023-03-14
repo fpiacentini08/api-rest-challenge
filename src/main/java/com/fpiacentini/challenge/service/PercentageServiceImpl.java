@@ -1,6 +1,7 @@
 package com.fpiacentini.challenge.service;
 
 import com.fpiacentini.challenge.cache.ThirdPartyPercentageCache;
+import com.fpiacentini.challenge.exception.NoPercentageAvailableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class PercentageServiceImpl implements PercentageService {
 
     private void updateCachedPercentage() throws Throwable {
         var percentage = thirdPartyPercentageService.getPercentage();
-        thirdPartyPercentageCache.setPercentage(percentage);
+        if(percentage.isEmpty()){
+            if(thirdPartyPercentageCache.hasBeenSet()){
+                return;
+            }
+            throw new NoPercentageAvailableException();
+        }
+        thirdPartyPercentageCache.setPercentage(percentage.get());
     }
 }

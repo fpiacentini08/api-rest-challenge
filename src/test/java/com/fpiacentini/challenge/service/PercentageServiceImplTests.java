@@ -3,6 +3,8 @@ package com.fpiacentini.challenge.service;
 import com.fpiacentini.challenge.cache.ThirdPartyPercentageCache;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -16,7 +18,7 @@ class PercentageServiceImplTests {
     void givenThirdPartyServiceResponse_whenGetPercentage_shouldReturnTheSameNumber() throws Throwable {
         final var thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(1800);
         final var percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
-        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
+        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(Optional.of(20));
         var percentage = percentageService.getPercentage();
         assertEquals(20, percentage);
         verify(thirdPartyPercentageServiceMock, times(1)).getPercentage();
@@ -26,7 +28,7 @@ class PercentageServiceImplTests {
     void givenCachedValueNotExpired_whenGetPercentage_shouldReturnTheCachedNumber() throws Throwable {
         final var thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(1800);
         final var percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
-        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
+        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(Optional.of(20));
         thirdPartyPercentageCacheMock.setPercentage(75);
         var percentage = percentageService.getPercentage();
         assertEquals(75, percentage);
@@ -37,7 +39,7 @@ class PercentageServiceImplTests {
     void givenCachedValueExpired_whenGetPercentage_shouldReturnTheThirdPartyServiceReturnedNumber() throws Throwable {
         final var thirdPartyPercentageCacheMock = new ThirdPartyPercentageCache(0);
         final var percentageService = new PercentageServiceImpl(thirdPartyPercentageServiceMock, thirdPartyPercentageCacheMock);
-        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(20);
+        when(thirdPartyPercentageServiceMock.getPercentage()).thenReturn(Optional.of(20));
         thirdPartyPercentageCacheMock.setPercentage(75);
         var percentage = percentageService.getPercentage();
         assertEquals(20, percentage);
