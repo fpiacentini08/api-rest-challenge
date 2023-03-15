@@ -19,8 +19,8 @@ mvn clean install
 This project includes a docker composer file to start the following containers:
 
 - database container
-- external webserver container
-- api-rest-challenge container
+- [external-service container](https://hub.docker.com/repository/docker/piacentini08/external-service/general)
+- [api-rest-challenge container](https://hub.docker.com/repository/docker/piacentini08/api-rest-challenge/general)
 
 
 So you can start the whole project by executing the following in the root folder:
