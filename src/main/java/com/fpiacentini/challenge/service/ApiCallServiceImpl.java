@@ -36,10 +36,8 @@ public class ApiCallServiceImpl implements ApiCallService {
         try {
             createApiCallHistory(convertApiDataToString(numbersToAdd, result));
         } catch (JsonProcessingException e) {
-            System.out.println(String.format("Entity could not be saved: %s, %s", numbersToAdd.toString(), result.toString()));
+            // DO NOTHING IF INSERT FAILS
         }
-        System.out.println(String.format("Entity saved: %s, %s", numbersToAdd.toString(), result.toString()));
-
     }
 
     private void createApiCallHistory(String apiCallData) {
