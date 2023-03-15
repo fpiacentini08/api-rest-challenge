@@ -9,7 +9,7 @@ function delete_container_and_volume() {
 }
 
 delete_container_and_volume
-docker-compose --file ./docker-compose.yml --env-file ../src/main/resources/application-default.properties up
+docker-compose --file ./scripts/docker-compose.yml --env-file src/main/resources/application-default.properties up
 
 
 
