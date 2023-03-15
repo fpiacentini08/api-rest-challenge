@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "256fad2c-70d4-476e-9a3e-a323937a70bd",
+		"name": "Challenge fpiacentini",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10143290"
+	},
+	"item": [
+		{
+			"name": "POST AddNumbers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstNumber\" : 2,\n    \"secondNumber\" : 7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/challenge",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"challenge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET history",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

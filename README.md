@@ -4,8 +4,9 @@ This repository contains Federico Piacentini's challenge.
 For extra information on the implementation details, you can check the [Wiki](https://github.com/fpiacentini08/api-rest-challenge/wiki).
 
 ## Prerequisites
-- Java 17
-- Maven 3.8.4
+
+- Have docker running locally
+- Having executed docker login
 
 
 ## Install
@@ -15,7 +16,21 @@ mvn clean install
 ```
 
 ## Running locally
-To run the project locally, execute the following:
+This project includes a docker composer file to start the following containers:
+
+- database container
+- external webserver container
+- api-rest-challenge container
+
+
+So you can start the whole project by executing the following in the root folder:
+
 ```
-mvn spring-boot:run
+./scripts/start.sh
 ```
+
+## How to consume this service?
+
+A description of the exposed apis and example curls can be found [here](https://github.com/fpiacentini08/api-rest-challenge/wiki/Functioning-and-assumptions).
+
+You can use the attached Postman Collection.

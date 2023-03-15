@@ -8,6 +8,8 @@ Only one GET endpoint will be exposed.
 
 This endpoint will respond a random integer number between 0 and 100.
 
+This simple webserver has also been dockerized. For more info [here](https://github.com/fpiacentini08/api-rest-challenge/wiki/Docker).
+
 ## Prerequisites
 - Python 3.8.2 or above
 
