@@ -33,4 +33,4 @@ So you can start the whole project by executing the following in the root folder
 
 A description of the exposed apis and example curls can be found [here](https://github.com/fpiacentini08/api-rest-challenge/wiki/Functioning-and-assumptions).
 
-You can use the attached Postman Collection.
+You can use the attached [Postman Collection](https://github.com/fpiacentini08/api-rest-challenge/blob/main/Challenge%20fpiacentini.postman_collection.json).
