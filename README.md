@@ -9,8 +9,8 @@ For extra information on the implementation details, you can check the [Wiki](ht
 - Having executed docker login
 
 
-## Install
-To generate the jar, execute the following:
+## Testing
+If you want to execute the tests locally and generate the jar, execute the following:
 ```
 mvn clean install
 ```
